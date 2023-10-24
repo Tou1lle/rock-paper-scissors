@@ -20,8 +20,6 @@ function getComputerChoice() {
     return choices[index];
 }
 
-console.log(getComputerChoice());
-
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
 
@@ -31,7 +29,7 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === rock && computerSelection === paper) {
         return "You Lose! Paper beats Rock";
     } else if (playerSelection === rock && computerSelection === scissors) {
-        return "You win! Rock beats Scissors";
+        return "You Win! Rock beats Scissors";
     }
 
     //If statement for player's scissors
@@ -40,7 +38,7 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === scissors && computerSelection === rock) {
         return "You Lose! Rock beats Scissors";
     } else if (playerSelection === scissors && computerSelection === paper) {
-        return "You win! Scissors beat Paper";
+        return "You Win! Scissors beat Paper";
     }
 
     //If statement for player's paper
@@ -49,10 +47,39 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === paper && computerSelection === scissors) {
         return "You Lose! Scissors beat Paper";
     } else if (playerSelection === paper && computerSelection === rock) {
-        return "You win! Paper beats Rock";
+        return "You Win! Paper beats Rock";
     }
 }
 
-const playerSelection = "sCiSSors";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        let input = prompt("Choose Rock, Paper or Scissors!");
+
+        let playerSelection = input;
+        let computerSelection = getComputerChoice();
+
+        let winner = playRound(playerSelection, computerSelection);
+
+        console.log(winner);
+
+        if (winner.includes("Win")) {
+            playerScore++;
+        } else if (winner.includes("Lose")) {
+            computerScore++;
+        }   
+
+    }
+
+    if (playerScore > computerScore) {
+        return "You win!!!";
+    } else if (computerScore > playerScore) {
+        return "You lose!!!";
+    } else {
+        return "The game TIED!";
+    }
+}
+
+console.log(game());
