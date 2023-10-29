@@ -12,6 +12,15 @@ const rock = "Rock";
 const paper = "Paper";
 const scissors = "Scissors";
 
+//take buttons and add them to nodelist
+const buttons = document.querySelectorAll(".btn");
+
+let result = document.querySelector(".result");
+
+let player = document.querySelector(".player");
+let computer = document.querySelector(".computer");
+let winner = document.querySelector(".winner");
+
 function getComputerChoice() {
     const choices = [rock, paper, scissors];
 
@@ -25,38 +34,56 @@ function playRound(playerSelection, computerSelection) {
 
     // If statement for player's rock 
     if (playerSelection === rock && computerSelection === rock) {
-        return "Tie!";
+        result.textContent = "Tie!";
     } else if (playerSelection === rock && computerSelection === paper) {
-        return "You Lose! Paper beats Rock";
+        result.textContent = "You Lose! Paper beats Rock";
     } else if (playerSelection === rock && computerSelection === scissors) {
-        return "You Win! Rock beats Scissors";
+        result.textContent = "You Win! Rock beats Scissors";
     }
 
     //If statement for player's scissors
     if (playerSelection === scissors && computerSelection === scissors) {
-        return "Tie!";
+        result.textContent = "Tie!";
     } else if (playerSelection === scissors && computerSelection === rock) {
-        return "You Lose! Rock beats Scissors";
+        result.textContent = "You Lose! Rock beats Scissors";
     } else if (playerSelection === scissors && computerSelection === paper) {
-        return "You Win! Scissors beat Paper";
+        result.textContent = "You Win! Scissors beat Paper";
     }
 
     //If statement for player's paper
     if (playerSelection === paper && computerSelection === paper) {
-        return "Tie!";
+        result.textContent = "Tie!";
     } else if (playerSelection === paper && computerSelection === scissors) {
-        return "You Lose! Scissors beat Paper";
+        result.textContent = "You Lose! Scissors beat Paper";
     } else if (playerSelection === paper && computerSelection === rock) {
-        return "You Win! Paper beats Rock";
+        result.textContent = "You Win! Paper beats Rock";
     }
 }
 
-//take buttons and add them to nodelist
-const buttons = document.querySelectorAll(".btn");
+function playGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+        //add to buttons event, check who won
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            playRound(button.textContent, getComputerChoice());
+            if (result.textContent.includes("Win")) {
+                playerScore++;
+                player.textContent = `Player: ${playerScore}`;
+            } else if (result.textContent.includes("Lose")) {
+                computerScore++;
+                computer.textContent = `Computer: ${computerScore}`;
+            }
 
-//Add to each button a corresponding event listener
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        console.log(playRound(button.textContent, getComputerChoice()));
+            if (playerScore == 5) {
+                winner.textContent = "Player WINS!";
+                return;
+            } else if (computerScore == 5) {
+                winner.textContent = "Computer WINS!"
+                return;
+            }
+        });
     });
-});
+}
+
+playGame();
