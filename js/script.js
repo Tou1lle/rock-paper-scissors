@@ -60,6 +60,12 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
+}
+
 function playGame() {
     let playerScore = 0;
     let computerScore = 0;
@@ -77,10 +83,10 @@ function playGame() {
 
             if (playerScore == 5) {
                 winner.textContent = "Player WINS!";
-                return;
+                disableButtons();
             } else if (computerScore == 5) {
                 winner.textContent = "Computer WINS!"
-                return;
+                disableButtons();
             }
         });
     });
