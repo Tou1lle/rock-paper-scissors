@@ -51,13 +51,12 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const buttonRock = document.querySelector("#rock");
-const buttonPaper = document.querySelector("#paper");
-const buttonScissor = document.querySelector("#scissors");
+//take buttons and add them to nodelist
+const buttons = document.querySelectorAll(".btn");
 
-console.log(buttonRock.textContent);
-
-let winner = buttonRock.addEventListener("click", playRound(buttonRock.textContent, getComputerChoice));
-
-console.log(winner);
-//console.log(game());
+//Add to each button a corresponding event listener
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        console.log(playRound(button.textContent, getComputerChoice()));
+    });
+});
